@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Title</title>
+
+<link href="../Bootstrap5/Bootstrap5-main/css/bootstrap.min.css" rel="stylesheet">
+<script src="../Bootstrap5/Bootstrap5-main/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+<h1 class="display-6 bg-info text-center fw-bolder p-3">ศัพท์ภาษาอังกฤษ</h1>
+
+<div class="px-3 h4">
+    <ul id="vocabList" class="list-group text-primary">
+        <!-- คำศัพท์จะถูกเพิ่มตรงนี้ -->
+    </ul>
+</div>
+
+<script>
+fetch('vocab.txt')
+.then(response => response.text())
+.then(data => {
+    const lines = data.split('\n');
+    const list = document.getElementById('vocabList');
+
+    lines.forEach(line => {
+        if(line.trim() !== ""){
+            const li = document.createElement('li');
+            li.className = "list-group-item";
+            li.textContent = line;
+            list.appendChild(li);
+        }
+    });
+})
+.catch(error => console.error('Error:', error));
+</script>
+
+</body>
+</html>
